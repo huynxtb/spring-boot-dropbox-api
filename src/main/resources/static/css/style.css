@@ -1,0 +1,33 @@
+body {
+    margin: 2em;
+}
+
+#btnFolder {
+    background-color: white;
+    color: #3085d6;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+}
+
+#btnDownload {
+    background-color: #3085d6;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#btnDelete {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}

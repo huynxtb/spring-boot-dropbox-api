@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dropbox API Spring Boot</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdn.datatables.net/buttons/1.2.2/css/buttons.bootstrap.min.css'>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Sweetalert -->
+    <script th:src="@{/sweetalert/sweetalert2.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/sweetalert/sweetalert2.min.css}"/>
+    <!--Jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<hr>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Dropbox API</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/}">List All File</a></li>
+            <li class="active"><a th:href="@{/list/folder}">List Folder</a></li>
+            <li><a th:href="@{/upload}">Upload File/Create Folder</a></li>
+        </ul>
+    </div>
+</nav>
+<!-- partial:index.partial.html -->
+<h1 style="text-align: center; color: chartreuse">Spring Boot-Dropbox API</h1>
+<p style="text-align: center">(upload, delete, download file and folder)</p>
+<h2 style="text-align: center; color: #3085d6"><a href="https://www.facebook.com/huynx.dev.dn/" target="_blank">Made by:
+    Nguyen Xuan Huy</a></h2>
+<hr>
+<h3 style="text-align: center; color: #f27474">List All Folder Dropbox</h3>
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th style="text-align: center" >Name</th>
+        <th style="text-align: center" >Path Lower</th>
+        <th style="text-align: center" >Download</th>
+        <th style="text-align: center" >Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dto : ${FOLDERS}">
+        <td style="text-align: center" th:text="${dto.name}"></td>
+        <td style="text-align: center" th:text="${dto.pathLower}"></td>
+
+        <td style="text-align: center" >
+            <form th:action="@{/download/zip}" method="get">
+                <input type="hidden" th:value="${dto.pathLower}" name="pathFolderDown">
+                <input type="submit" id="btnDownload" value="Download">
+            </form>
+        </td>
+
+        <td style="text-align: center" >
+            <form th:action="@{/delete/folder}" method="post">
+                <input type="hidden" th:value="${dto.pathLower}" name="pathFolderDel">
+                <input class="w3-button w3-red" type="submit" id="btnTestD" value="Delete">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script src='https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js'></script>
+<script src='https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js'></script>
+<script src='https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js'></script>
+<script src='https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js'></script>
+<script src='https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js'></script>
+<script src='https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js'></script>
+<script src='https://cdn.datatables.net/buttons/1.2.2/js/buttons.bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js'></script>
+<script src='https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js'></script>
+<script src='https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js'></script>
+
+<script  th:src="@{/js/script.js}"></script>
+
+<script>
+
+    function clickDelFolders(){
+        swal({
+            title: 'Please Wait !',
+            html: 'Data deleting...',// add html attribute if you want or remove
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+                swal.showLoading()
+            },
+        });
+    }
+
+</script>
+</body>
+</html>>
